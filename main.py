@@ -16,14 +16,20 @@ def create_data(matrix, n, m):
     for i in range(256 // n):
         for y in range(n):
             line = []
-            for j in range(256 // m):
-                for x in range(m):
-                    pixel = []
-                    for color in range(3):
-                        pixel.append(tp1(matrix[i * blocks_in_line + j][(y * m * 3) + (x * 3) + color]))
-                    line.append(tuple(pixel))
-            array+=line
+            line1 = add_data(blocks_in_line,matrix,line,y,i)
+            array+=line1
     return array
+
+def add_data(blocks_in_line,matrix,line,y,i):
+    for j in range(256 // m):
+        for x in range(m):
+            pixel = []
+            pixel.append(tp1(matrix[i * blocks_in_line + j][(y * m * 3) + (x * 3) + 0]))
+            pixel.append(tp1(matrix[i * blocks_in_line + j][(y * m * 3) + (x * 3) + 1]))
+            pixel.append(tp1(matrix[i * blocks_in_line + j][(y * m * 3) + (x * 3) + 2]))
+            line.append(tuple(pixel))
+    return line
+
 
 def mt(mat):
     res = []
